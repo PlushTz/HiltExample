@@ -2,6 +2,8 @@ package com.example.utils
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.hilt.R
 
 /**
@@ -17,6 +19,15 @@ class ImageUtil {
             Glide.with(imageView.context)
                 .load(url)
                 .centerCrop()
+                .error(R.mipmap.photo_default)
+                .into(imageView)
+        }
+
+        @JvmStatic
+        fun loadRoundPhoto(imageView: ImageView,url: String){
+            Glide.with(imageView.context)
+                .load(url)
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(12)))
                 .error(R.mipmap.photo_default)
                 .into(imageView)
         }

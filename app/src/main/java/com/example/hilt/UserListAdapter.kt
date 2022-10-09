@@ -36,7 +36,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserHolder>() {
 
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         val user = data[position]
-        ImageUtil.loadPhoto(holder.binding.ivPhoto, user.photo)
+        ImageUtil.loadRoundPhoto(holder.binding.ivPhoto, user.photo)
         holder.binding.tvUsername.text = user.userName
     }
 
