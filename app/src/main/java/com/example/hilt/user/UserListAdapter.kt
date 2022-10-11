@@ -1,11 +1,11 @@
-package com.example.hilt
+package com.example.hilt.user
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.database.entity.User
+import com.example.hilt.R
 import com.example.hilt.databinding.ItemUserBinding
 import com.example.utils.ImageUtil
 
@@ -55,7 +55,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserHolder>() {
         fun onLongClickListener(bean: User, position: Int)
     }
 
-    var listener: OnItemClickListener? = null
+    private var listener: OnItemClickListener? = null
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener

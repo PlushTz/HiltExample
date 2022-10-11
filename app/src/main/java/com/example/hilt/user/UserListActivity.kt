@@ -1,7 +1,6 @@
-package com.example.hilt
+package com.example.hilt.user
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -9,7 +8,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.database.entity.User
-import com.example.hilt.databinding.ActivitySecBinding
+import com.example.hilt.R
+import com.example.hilt.databinding.ActivityUserListBinding
 import com.example.itemdecoration.ItemDecoration
 import com.example.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,13 +23,13 @@ import kotlinx.coroutines.launch
  */
 @AndroidEntryPoint
 class UserListActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySecBinding
+    private lateinit var binding: ActivityUserListBinding
     val viewModel: MainViewModel by viewModels()
     private val data = mutableListOf<User>()
     private var userListAdapter: UserListAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_sec)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_user_list)
         init()
     }
 
