@@ -8,8 +8,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_root"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="60dp"
+        android:background="@drawable/item_bg">
 
         <ImageView
             android:id="@+id/iv_photo"
@@ -28,9 +30,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:gravity="center"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@+id/iv_photo"
             app:layout_constraintStart_toEndOf="@+id/iv_photo"
             app:layout_constraintTop_toTopOf="@+id/iv_photo"

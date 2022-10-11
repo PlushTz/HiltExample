@@ -1,6 +1,7 @@
 package com.example.hilt
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -25,12 +26,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolder {
-        val inflate = DataBindingUtil.inflate<ItemUserBinding>(
-            LayoutInflater.from(parent.context),
-            R.layout.item_user,
-            parent,
-            false
-        )
+        val inflate = DataBindingUtil.inflate<ItemUserBinding>(LayoutInflater.from(parent.context), R.layout.item_user, parent, false)
         return UserHolder(inflate)
     }
 
@@ -38,6 +34,13 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserHolder>() {
         val user = data[position]
         ImageUtil.loadRoundPhoto(holder.binding.ivPhoto, user.photo)
         holder.binding.tvUsername.text = user.userName
+        holder.binding.clRoot.setOnClickListener {
+            listener?.onClickListener(user, position)
+        }
+        holder.binding.clRoot.setOnLongClickListener {
+            listener?.onLongClickListener(user, position)
+            true
+        }
     }
 
     override fun getItemCount(): Int {
@@ -45,4 +48,16 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserHolder>() {
     }
 
     class UserHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root)
+
+    interface OnItemClickListener {
+        fun onClickListener(bean: User, position: Int)
+
+        fun onLongClickListener(bean: User, position: Int)
+    }
+
+    var listener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
 }
