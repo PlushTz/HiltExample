@@ -4,7 +4,7 @@
     android:insetRight="0dp">
 
     <shape>
-        <size android:height="1px" />
+        <size android:height="5px" />
         <solid android:color="@color/purple_200" />
     </shape>
 

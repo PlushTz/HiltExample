@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HiltExample"
         tools:targetApi="31">
-        <activity android:name=".main.MainActivity"/>
+        <activity android:name=".main.MainActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".user.UserListActivity" />
         <activity
             android:name=".splash.SplashActivity"

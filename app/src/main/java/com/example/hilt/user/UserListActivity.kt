@@ -5,7 +5,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.database.entity.User
 import com.example.hilt.R
@@ -48,9 +47,7 @@ class UserListActivity : AppCompatActivity() {
         binding.rvUserList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val itemDecoration = ItemDecoration(this, ItemDecoration.VERTICAL, false, null)
         itemDecoration.setDrawable(resources.getDrawable(R.drawable.item_divider_bg))
-        val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.item_divider_bg))
-        binding.rvUserList.addItemDecoration(dividerItemDecoration)
+        binding.rvUserList.addItemDecoration(itemDecoration)
         lifecycleScope.launch {
             viewModel.queryAllUser()
         }

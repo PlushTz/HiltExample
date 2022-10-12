@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import java.lang.IllegalArgumentException
 import kotlin.math.roundToInt
 
 /**
@@ -76,37 +75,6 @@ class ItemDecoration() : RecyclerView.ItemDecoration() {
 
     private fun drawHorizontal(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         canvas.save()
-        val left: Int
-        val right: Int
-        if (parent.clipToPadding) {
-            left = parent.paddingLeft
-            right = parent.width - parent.paddingRight
-            canvas.clipRect(left, parent.paddingTop, right, parent.height - parent.paddingBottom)
-        } else {
-            left = 0
-            right = parent.width
-        }
-        val childCount = parent.childCount
-        val lastPosition = state.itemCount - 1
-        for (i in 0 until childCount) {
-            val childView = parent.getChildAt(i)
-            val childRealPosition = parent.getChildAdapterPosition(childView)
-            if (isShowBottomDivider == true || childRealPosition < lastPosition) {
-                if (isNeedHide(childRealPosition)) {
-                    continue
-                }
-                parent.getDecoratedBoundsWithMargins(childView, mBounds)
-                val bottom = mBounds.bottom + childView.translationY.roundToInt()
-                val top = bottom - (driver?.intrinsicHeight ?: 0)
-                driver?.setBounds(left, top, right, bottom)
-                driver?.draw(canvas)
-            }
-        }
-        canvas.restore()
-    }
-
-    private fun drawVertical(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        canvas.save()
         val top: Int
         val bottom: Int
         if (parent.clipToPadding) {
@@ -129,6 +97,37 @@ class ItemDecoration() : RecyclerView.ItemDecoration() {
                 parent.layoutManager?.getDecoratedBoundsWithMargins(childView, mBounds)
                 val right = mBounds.right + childView.translationY.roundToInt()
                 val left = right - (driver?.intrinsicWidth ?: 0)
+                driver?.setBounds(left, top, right, bottom)
+                driver?.draw(canvas)
+            }
+        }
+        canvas.restore()
+    }
+
+    private fun drawVertical(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        canvas.save()
+        val left: Int
+        val right: Int
+        if (parent.clipToPadding) {
+            left = parent.paddingLeft
+            right = parent.width - parent.paddingRight
+            canvas.clipRect(left, parent.paddingTop, right, parent.height - parent.paddingBottom)
+        } else {
+            left = 0
+            right = parent.width
+        }
+        val childCount = parent.childCount
+        val lastPosition = state.itemCount - 1
+        for (i in 0 until childCount) {
+            val childView = parent.getChildAt(i)
+            val childRealPosition = parent.getChildAdapterPosition(childView)
+            if (isShowBottomDivider == true || childRealPosition < lastPosition) {
+                if (isNeedHide(childRealPosition)) {
+                    continue
+                }
+                parent.getDecoratedBoundsWithMargins(childView, mBounds)
+                val bottom = mBounds.bottom + childView.translationY.roundToInt()
+                val top = bottom - (driver?.intrinsicHeight ?: 0)
                 driver?.setBounds(left, top, right, bottom)
                 driver?.draw(canvas)
             }
