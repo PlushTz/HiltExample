@@ -27,7 +27,7 @@ class ItemDecoration() : RecyclerView.ItemDecoration() {
     var hideItems: Array<Int>? = null
     var isShowBottomDivider: Boolean? = null
     var orientation: Int? = null
-    var driver: Drawable? = null
+    var mDivider: Drawable? = null
 
     private val mBounds = Rect()
 
@@ -35,8 +35,8 @@ class ItemDecoration() : RecyclerView.ItemDecoration() {
         this.hideItems = hideItems
         this.isShowBottomDivider = isShowBottomDivider
         val typedArray = context.obtainStyledAttributes(ATTRS)
-        driver = typedArray.getDrawable(0)
-        if (driver == null) {
+        mDivider = typedArray.getDrawable(0)
+        if (mDivider == null) {
             Log.w("TAG", "driver is null")
         }
         typedArray.recycle()
@@ -59,11 +59,11 @@ class ItemDecoration() : RecyclerView.ItemDecoration() {
         if (drawable == null) {
             throw IllegalArgumentException("Drawable cannot be null.")
         }
-        driver = drawable
+        mDivider = drawable
     }
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        if (parent.layoutManager == null || driver == null) {
+        if (parent.layoutManager == null || mDivider == null) {
             return
         }
         if (orientation == VERTICAL) {
@@ -96,9 +96,9 @@ class ItemDecoration() : RecyclerView.ItemDecoration() {
                 }
                 parent.layoutManager?.getDecoratedBoundsWithMargins(childView, mBounds)
                 val right = mBounds.right + childView.translationY.roundToInt()
-                val left = right - (driver?.intrinsicWidth ?: 0)
-                driver?.setBounds(left, top, right, bottom)
-                driver?.draw(canvas)
+                val left = right - (mDivider?.intrinsicWidth ?: 0)
+                mDivider?.setBounds(left, top, right, bottom)
+                mDivider?.draw(canvas)
             }
         }
         canvas.restore()
@@ -127,9 +127,9 @@ class ItemDecoration() : RecyclerView.ItemDecoration() {
                 }
                 parent.getDecoratedBoundsWithMargins(childView, mBounds)
                 val bottom = mBounds.bottom + childView.translationY.roundToInt()
-                val top = bottom - (driver?.intrinsicHeight ?: 0)
-                driver?.setBounds(left, top, right, bottom)
-                driver?.draw(canvas)
+                val top = bottom - (mDivider?.intrinsicHeight ?: 0)
+                mDivider?.setBounds(left, top, right, bottom)
+                mDivider?.draw(canvas)
             }
         }
         canvas.restore()
@@ -148,14 +148,14 @@ class ItemDecoration() : RecyclerView.ItemDecoration() {
     }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        if (driver == null) {
+        if (mDivider == null) {
             outRect.set(0, 0, 0, 0)
         }
         if (orientation == VERTICAL) {
             val lastPosition = state.itemCount - 1
             val position = parent.getChildAdapterPosition(view)
             if ((isShowBottomDivider == true || position < lastPosition) && !isNeedHide(position)) {
-                outRect.set(0, 0, 0, driver?.intrinsicHeight ?: 0)
+                outRect.set(0, 0, 0, mDivider?.intrinsicHeight ?: 0)
             } else {
                 outRect.set(0, 0, 0, 0)
             }
@@ -163,7 +163,7 @@ class ItemDecoration() : RecyclerView.ItemDecoration() {
             val lastPosition = state.itemCount - 1
             val position = parent.getChildAdapterPosition(view)
             if ((isShowBottomDivider == true || position < lastPosition) && !isNeedHide(position)) {
-                outRect.set(0, 0, driver?.intrinsicWidth ?: 0, 0)
+                outRect.set(0, 0, mDivider?.intrinsicWidth ?: 0, 0)
             } else {
                 outRect.set(0, 0, 0, 0)
             }
