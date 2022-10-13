@@ -16,6 +16,7 @@ import com.example.hilt.R
 import com.example.hilt.databinding.ActivityUserListBinding
 import com.example.hilt.databinding.EditUserPopupBinding
 import com.example.itemdecoration.ItemDecoration
+import com.example.utils.DisplayUtil
 import com.example.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -46,11 +47,25 @@ class UserListActivity : AppCompatActivity() {
             }
 
             override fun onLongClickListener(bean: User, position: Int, view: View, x: Int, y: Int) {
+                val locationOnScreen = IntArray(2)
+                view.getLocationOnScreen(locationOnScreen)
+                val screenWidth = DisplayUtil.getScreenSize(this@UserListActivity, false)[0]
                 val inflate = DataBindingUtil.inflate<EditUserPopupBinding>(LayoutInflater.from(view.context), R.layout.edit_user_popup, null, false)
                 val popupWindow = PopupWindow(inflate.root, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                 popupWindow.isFocusable = true
                 popupWindow.isOutsideTouchable = true
-                popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, x, y)
+                var itemX = locationOnScreen[0] + x
+                if (itemX > screenWidth / 2) {
+                    itemX -= DisplayUtil.sp2px(this@UserListActivity, 88F)
+                }
+                popupWindow.showAtLocation(view, Gravity.NO_GRAVITY, itemX, y + locationOnScreen[1])
+                inflate.tvDelete.setOnClickListener {
+                    lifecycleScope.launch {
+                        viewModel.deleteAllUser(bean)
+                    }
+                    userListAdapter?.notifyItemRemoved(bean)
+                    popupWindow.dismiss()
+                }
             }
         })
         binding.rvUserList.adapter = userListAdapter

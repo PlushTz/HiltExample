@@ -27,6 +27,12 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserHolder>() {
         notifyDataSetChanged()
     }
 
+    fun notifyItemRemoved(user: User) {
+        val position = this.data.indexOfFirst { it.id == user.id }
+        this.data.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolder {
         val inflate = DataBindingUtil.inflate<ItemUserBinding>(LayoutInflater.from(parent.context), R.layout.item_user, parent, false)
         return UserHolder(inflate)
@@ -36,13 +42,6 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserHolder>() {
         val user = data[position]
         ImageUtil.loadRoundPhoto(holder.binding.ivPhoto, user.photo)
         holder.binding.tvUsername.text = user.userName
-//        holder.binding.clRoot.setOnClickListener {
-//            listener?.onClickListener(user, position)
-//        }
-//        holder.binding.clRoot.setOnLongClickListener {
-//            listener?.onLongClickListener(user, position)
-//            true
-//        }
     }
 
     override fun getItemCount(): Int {
