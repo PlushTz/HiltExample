@@ -56,8 +56,8 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserHolder>() {
             itemView.setOnTouchListener(this)
         }
 
-        var x = 0
-        var y = 0
+        private var x = 0
+        private var y = 0
         override fun onTouch(v: View?, event: MotionEvent?): Boolean {
             x = event?.x?.toInt() ?: 0
             y = event?.y?.toInt() ?: 0

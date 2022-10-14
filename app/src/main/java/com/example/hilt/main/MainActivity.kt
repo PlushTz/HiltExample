@@ -11,14 +11,18 @@ import com.example.database.entity.User
 import com.example.hilt.R
 import com.example.hilt.databinding.ActivityMainBinding
 import com.example.hilt.user.UserListActivity
+import com.example.net.ApiRetrofit
 import com.example.utils.PhotoUtil
 import com.example.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var apiService: ApiRetrofit
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
     private val users = mutableListOf<User>()
@@ -46,11 +50,18 @@ class MainActivity : AppCompatActivity() {
     private fun initListener() {
         binding.btnInsert.setOnClickListener {
             lifecycleScope.launch {
-                for (i in 0 until 10) {
-                    val photos = PhotoUtil.genPhoto()
-                    val user = User(null, "${System.currentTimeMillis()}", "123456789", photos[i])
-                    viewModel.insert(user)
+//                for (i in 0 until 10) {
+//                    val photos = PhotoUtil.genPhoto()
+//                    val user = User(null, "${System.currentTimeMillis()}", "123456789", photos[i])
+//                    viewModel.insert(user)
+//                }
+                try {
+                    val response = apiService.searchRepos("android")
+                    Log.d("ShLog--", "response:$response")
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
+
             }
         }
 
