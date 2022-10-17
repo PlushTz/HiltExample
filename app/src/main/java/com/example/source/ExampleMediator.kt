@@ -1,13 +1,12 @@
 package com.example.source
 
-import androidx.paging.*
-import androidx.room.withTransaction
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadType
+import androidx.paging.PagingState
+import androidx.paging.RemoteMediator
 import com.example.database.ExampleDatabase
 import com.example.database.entity.Search
-import com.example.database.entity.User
-import com.example.ktx.build
 import com.example.net.GitHubApi
-import com.example.response.SearchResponse
 
 /**
  * Desc:
