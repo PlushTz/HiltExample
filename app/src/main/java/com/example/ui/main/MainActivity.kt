@@ -1,4 +1,4 @@
-package com.example.hilt.main
+package com.example.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.database.entity.User
 import com.example.hilt.R
 import com.example.hilt.databinding.ActivityMainBinding
-import com.example.hilt.user.UserListActivity
+import com.example.ui.user.UserListActivity
 import com.example.net.ApiRetrofit
 import com.example.utils.PhotoUtil
 import com.example.viewmodel.MainViewModel

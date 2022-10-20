@@ -15,12 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HiltExample"
         tools:targetApi="31">
-        <activity android:name=".main.MainActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".user.UserListActivity" />
         <activity
-            android:name=".splash.SplashActivity"
-            android:theme="@style/SplashTheme"
+            android:name="com.example.ui.main.MainActivity"
+            android:launchMode="singleTask" />
+        <activity android:name="com.example.ui.user.UserListActivity" />
+        <activity
+            android:name="com.example.ui.splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme"/>
+        <activity
+            android:name="com.example.ui.launch.LaunchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

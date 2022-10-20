@@ -1,4 +1,4 @@
-package com.example.hilt.user
+package com.example.ui.user
 
 import android.view.LayoutInflater
 import android.view.MotionEvent

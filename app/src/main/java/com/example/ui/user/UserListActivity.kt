@@ -1,4 +1,4 @@
-package com.example.hilt.user
+package com.example.ui.user
 
 import android.os.Bundle
 import android.view.Gravity

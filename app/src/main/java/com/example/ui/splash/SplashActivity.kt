@@ -1,9 +1,9 @@
-package com.example.hilt.splash
+package com.example.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.hilt.main.MainActivity
+import com.example.ui.main.MainActivity
 
 /**
  * Desc:
