@@ -1,9 +1,7 @@
 package com.example.net
 
-import com.ayvytr.okhttploginterceptor.LoggingInterceptor
-import com.ayvytr.okhttploginterceptor.Priority
-import com.ayvytr.okhttploginterceptor.printer.IPrinter
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -25,15 +23,15 @@ open class BaseApiRetrofit {
     }
 
     private val mGitHubClient: OkHttpClient by lazy {
+        val logger = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.HEADERS
+            level = HttpLoggingInterceptor.Level.BODY
+        }
         OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(LoggingInterceptor(showLog = true, isShowAll = false, tag = "ShLog--", priority = Priority.D, visualFormat = true, maxLineLength = Int.MAX_VALUE, object : IPrinter {
-                override fun print(priority: Priority, tag: String, msg: String) {
-
-                }
-            }))
+            .addInterceptor(logger)
             .build()
     }
 }
