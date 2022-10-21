@@ -4,4 +4,6 @@
     <string name="select">select</string>
     <string name="delete">delete</string>
     <string name="update">update</string>
+    <string name="btn_request">request</string>
+    <string name="showdialog">showdialog</string>
 </resources>
