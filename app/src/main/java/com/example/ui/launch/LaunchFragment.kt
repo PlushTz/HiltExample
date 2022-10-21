@@ -40,6 +40,7 @@ class LaunchFragment : Fragment() {
         val tabLayout = binding.tabLayout
         val viewPager = binding.viewPager
         viewPager.adapter = ExamplePagerAdapter(this, fragments)
+        viewPager.isUserInputEnabled = false
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.setIcon(getTabIcon(position))
             tab.text = getTabTitle(position)
@@ -48,7 +49,7 @@ class LaunchFragment : Fragment() {
 
     private fun getTabIcon(position: Int): Int {
         return when (position) {
-            0 -> R.drawable.drawable_running_tab
+            0 -> R.drawable.drawable_home_tab
             1 -> R.drawable.drawable_personal_tab
             else -> throw IndexOutOfBoundsException()
         }
