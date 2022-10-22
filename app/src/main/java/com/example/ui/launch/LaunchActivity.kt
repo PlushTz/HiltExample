@@ -3,8 +3,8 @@ package com.example.ui.launch
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.hilt.R
-import com.example.hilt.databinding.ActivityLaunchBinding
+import com.example.travel.R
+import com.example.travel.databinding.ActivityLaunchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

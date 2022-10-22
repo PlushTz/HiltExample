@@ -7,12 +7,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
+import com.example.travel.R
 import com.example.database.entity.User
-import com.example.hilt.R
-import com.example.hilt.databinding.ActivityMainBinding
-import com.example.ui.user.UserListActivity
+import com.example.travel.databinding.ActivityMainBinding
 import com.example.net.ApiRetrofit
-import com.example.utils.PhotoUtil
+import com.example.ui.user.UserListActivity
 import com.example.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

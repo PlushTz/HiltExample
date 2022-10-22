@@ -12,9 +12,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.database.entity.User
-import com.example.hilt.R
-import com.example.hilt.databinding.ActivityUserListBinding
-import com.example.hilt.databinding.EditUserPopupBinding
+import com.example.travel.R
+import com.example.travel.databinding.ActivityUserListBinding
+import com.example.travel.databinding.EditUserPopupBinding
 import com.example.itemdecoration.ItemDecoration
 import com.example.utils.DisplayUtil
 import com.example.viewmodel.MainViewModel

@@ -4,7 +4,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.example.hilt.R
+import com.example.travel.R
 
 /**
  * Desc:

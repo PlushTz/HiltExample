@@ -10,4 +10,13 @@
         android:name="com.example.ui.launch.LaunchFragment"
         android:label="LaunchFragment"
         tools:layout="@layout/fragment_launch" />
+    <activity
+        android:id="@+id/AMapActivity"
+        android:name="com.example.ui.map.AMapActivity"
+        android:label="AMapActivity"
+        tools:layout="@layout/activity_amap" />
+    <action
+        android:id="@+id/startAMap"
+        app:destination="@id/AMapActivity"
+        app:popUpTo="@id/launchFragment" />
 </navigation>

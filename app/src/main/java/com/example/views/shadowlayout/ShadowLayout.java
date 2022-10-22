@@ -11,7 +11,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.example.hilt.R;
+import com.example.travel.R;
 
 /**
  * ShadowLayout.java

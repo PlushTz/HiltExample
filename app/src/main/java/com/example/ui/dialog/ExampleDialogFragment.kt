@@ -11,8 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.example.hilt.R
-import com.example.hilt.databinding.DialogExampleBinding
+import com.example.travel.R
+import com.example.travel.databinding.DialogExampleBinding
 
 /**
  * Desc:

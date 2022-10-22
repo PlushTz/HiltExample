@@ -1,18 +1,14 @@
 package com.example.ui.running
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import com.example.hilt.databinding.FragmentRunningBinding
+import com.amap.api.maps.AMap
 import com.example.net.ApiRetrofit
-import com.example.net.GitHubApi
-import com.example.ui.dialog.ExampleDialogFragment
+import com.example.travel.databinding.FragmentRunningBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -27,41 +23,42 @@ class RunningFragment : Fragment() {
 
     @Inject
     lateinit var apiRetrofit: ApiRetrofit
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        init()
-    }
+    private var mAMap: AMap? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRunningBinding.inflate(inflater, container, false)
-        initListener()
+        binding.mapview.onCreate(savedInstanceState)
+        initAMap()
         return binding.root
     }
 
-    private fun initListener() {
-        binding.btnRequest.setOnClickListener {
-            lifecycleScope.launch {
-                apiRetrofit.searchRepos("okhttp")
-            }
-        }
-
-        binding.btnShowDialog.setOnClickListener {
-            val dialog = ExampleDialogFragment()
-            dialog.show(childFragmentManager, ExampleDialogFragment.TAG)
-            dialog.setOnDialogClickListener(object : ExampleDialogFragment.OnDialogClickListener {
-                override fun onCommit() {
-                    Log.d("TAG", "onCommit")
-                }
-
-                override fun onCancel() {
-                    Log.d("TAG", "onCancel")
-                }
-            })
+    private fun initAMap() {
+        if (mAMap == null) {
+            mAMap = binding.mapview.map
         }
     }
 
-    private fun init() {
+    private fun initListener() {
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.mapview.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.mapview.onPause()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        binding.mapview.onSaveInstanceState(outState)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.mapview.onDestroy()
     }
 }

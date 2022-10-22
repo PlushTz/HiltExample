@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.hilt.R
-import com.example.hilt.databinding.FragmentLaunchBinding
+import com.example.travel.R
+import com.example.travel.databinding.FragmentLaunchBinding
 import com.example.ui.personal.PersonalCenterFragment
 import com.example.ui.running.RunningFragment
 import com.google.android.material.tabs.TabLayoutMediator

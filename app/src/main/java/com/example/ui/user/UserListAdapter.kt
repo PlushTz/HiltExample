@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.database.entity.User
-import com.example.hilt.R
-import com.example.hilt.databinding.ItemUserBinding
+import com.example.travel.R
+import com.example.travel.databinding.ItemUserBinding
 import com.example.utils.ImageUtil
 
 /**
