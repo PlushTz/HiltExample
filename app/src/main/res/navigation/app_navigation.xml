@@ -17,6 +17,5 @@
         tools:layout="@layout/activity_amap" />
     <action
         android:id="@+id/startAMap"
-        app:destination="@id/AMapActivity"
-        app:popUpTo="@id/launchFragment" />
+        app:destination="@id/AMapActivity" />
 </navigation>

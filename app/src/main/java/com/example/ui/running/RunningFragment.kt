@@ -1,6 +1,7 @@
 package com.example.ui.running
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,20 +46,24 @@ class RunningFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         binding.mapview.onResume()
+        Log.d("TAG", "onResume")
     }
 
     override fun onPause() {
         super.onPause()
         binding.mapview.onPause()
+        Log.d("TAG", "onPause")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         binding.mapview.onSaveInstanceState(outState)
+        Log.d("TAG", "onSaveInstanceState")
     }
 
     override fun onDestroy() {
         super.onDestroy()
         binding.mapview.onDestroy()
+        Log.d("TAG", "onDestroy")
     }
 }

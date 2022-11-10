@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,13 +11,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/drawable_personal_tab"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_personal_head"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_photo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_photo"
+                app:layout_constraintTop_toTopOf="@+id/iv_photo"
+                tools:text="昵称" />
+
+            <TextView
+                android:id="@+id/tv_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_photo"
+                app:layout_constraintStart_toStartOf="@+id/tv_nickname"
+                app:layout_constraintTop_toBottomOf="@+id/tv_nickname"
+                tools:text="账号" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

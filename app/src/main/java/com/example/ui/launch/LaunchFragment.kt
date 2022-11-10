@@ -37,29 +37,38 @@ class LaunchFragment : Fragment() {
     }
 
     private fun initListener() {
+        binding.toolbar.setTitleTextColor(resources.getColor(R.color.white))
         val tabLayout = binding.tabLayout
         val viewPager = binding.viewPager
         viewPager.adapter = ExamplePagerAdapter(this, fragments)
         viewPager.isUserInputEnabled = false
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.setIcon(getTabIcon(position))
-            tab.text = getTabTitle(position)
+            val tabTitle = getTabTitle(position)
+            tab.text = tabTitle
+            binding.toolbar.title = tabTitle
         }.attach()
     }
 
     private fun getTabIcon(position: Int): Int {
         return when (position) {
-            0 -> R.drawable.drawable_home_tab
-            1 -> R.drawable.drawable_personal_tab
+            0 -> {
+                binding.toolbar.title = getTabTitle(position)
+                R.drawable.drawable_home_tab
+            }
+            1 -> {
+                binding.toolbar.title = getTabTitle(position)
+                R.drawable.drawable_personal_tab
+            }
             else -> throw IndexOutOfBoundsException()
         }
     }
 
-    private fun getTabTitle(position: Int): String? {
+    private fun getTabTitle(position: Int): String {
         return when (position) {
             0 -> "running"
             1 -> "personal"
-            else -> null
+            else -> throw IndexOutOfBoundsException()
         }
     }
 }
