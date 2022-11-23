@@ -39,11 +39,10 @@ class LaunchFragment : Fragment() {
     private fun initListener() {
         val tabLayout = binding.tabLayout
         val viewPager = binding.viewPager
-        viewPager.adapter = ExamplePagerAdapter(this, fragments)
+        viewPager.adapter = ExamplePagerAdapter(requireActivity(), fragments)
         viewPager.isUserInputEnabled = false
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.setIcon(getTabIcon(position))
-            tab.text = getTabTitle(position)
         }.attach()
     }
 

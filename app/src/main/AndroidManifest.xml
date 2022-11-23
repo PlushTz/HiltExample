@@ -24,6 +24,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:hardwareAccelerated="true"
         android:theme="@style/Theme.HiltExample"
         tools:targetApi="31">
         <!-- 开发者申请的key -->
@@ -33,7 +34,10 @@
 
         <activity
             android:name="com.example.ui.main.MainActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:exported="true">
+
+        </activity>
         <activity android:name="com.example.ui.user.UserListActivity" />
         <activity
             android:name="com.example.ui.splash.SplashActivity"

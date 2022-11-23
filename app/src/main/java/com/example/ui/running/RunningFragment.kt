@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.amap.api.maps.AMap
-import com.example.net.ApiRetrofit
+import com.amap.api.maps.MapsInitializer
 import com.example.travel.databinding.FragmentRunningBinding
+import com.example.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 /**
  * Desc:
@@ -18,17 +17,23 @@ import javax.inject.Inject
  * Email: lijt@eetrust.com
  */
 @AndroidEntryPoint
-class RunningFragment : Fragment() {
+class RunningFragment : BaseFragment() {
     private lateinit var binding: FragmentRunningBinding
 
-    @Inject
-    lateinit var apiRetrofit: ApiRetrofit
     private var mAMap: AMap? = null
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        MapsInitializer.updatePrivacyShow(requireActivity(), true, true)
+        MapsInitializer.updatePrivacyAgree(requireActivity(), true)
+        binding.mapview.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRunningBinding.inflate(inflater, container, false)
         binding.mapview.onCreate(savedInstanceState)
         initAMap()
+        initListener()
         return binding.root
     }
 
@@ -61,4 +66,10 @@ class RunningFragment : Fragment() {
         super.onDestroy()
         binding.mapview.onDestroy()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.mapview.onDestroy()
+    }
+
 }

@@ -68,6 +68,7 @@ android {
 }
 
 dependencies {
+    implementation fileTree(include: '*.jar', dir: 'libs')
     implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
     // Hilt
@@ -94,8 +95,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     // AMap
-    implementation "com.amap.api:3dmap:5.0.0"
-    implementation "com.amap.api:location:3.3.0"
+//    implementation "com.amap.api:3dmap:5.0.0"
+//    implementation "com.amap.api:location:3.3.0"
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
