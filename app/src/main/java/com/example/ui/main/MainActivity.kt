@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.isUserInputEnabled = false
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.setIcon(getTabIcon(position))
+            tab.text = getTabTitle(position)
         }.attach()
     }
 

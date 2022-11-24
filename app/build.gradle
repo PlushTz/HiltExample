@@ -89,14 +89,15 @@ dependencies {
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:4.10.0"
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
-
     // navigation
     def nav_version = "2.5.2"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    // AMap
-//    implementation "com.amap.api:3dmap:5.0.0"
-//    implementation "com.amap.api:location:3.3.0"
+    // permissionx
+    implementation 'com.guolindev.permissionx:permissionx:1.7.1'
+    // statusbarutil
+    implementation 'com.github.Ye-Miao:StatusBarUtil:1.7.5'
+    implementation 'com.qmuiteam:qmui:2.0.0-alpha10'
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'

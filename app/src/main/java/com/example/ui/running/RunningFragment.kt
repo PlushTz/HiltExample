@@ -1,13 +1,18 @@
 package com.example.ui.running
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.amap.api.location.AMapLocation
 import com.amap.api.maps.AMap
 import com.amap.api.maps.MapsInitializer
 import com.example.travel.databinding.FragmentRunningBinding
 import com.example.ui.base.BaseFragment
+import com.example.utils.AMapLocationManager
+import com.example.views.behavior.GaoDeBottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -22,19 +27,37 @@ class RunningFragment : BaseFragment() {
 
     private var mAMap: AMap? = null
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        MapsInitializer.updatePrivacyShow(requireActivity(), true, true)
-        MapsInitializer.updatePrivacyAgree(requireActivity(), true)
-        binding.mapview.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentRunningBinding.inflate(inflater, container, false)
         binding.mapview.onCreate(savedInstanceState)
+        initView()
         initAMap()
-        initListener()
         return binding.root
+    }
+
+    private fun initView() {
+        val behavior = GaoDeBottomSheetBehavior.from(binding.bottomSheet)
+        behavior.setBottomSheetCallback(object : GaoDeBottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(var1: View, var2: Int) {
+
+            }
+
+            override fun onSlide(var1: View, var2: Float) {
+
+            }
+        })
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        MapsInitializer.updatePrivacyShow(requireActivity(), true, true)
+        MapsInitializer.updatePrivacyAgree(requireActivity(), true)
+        binding.mapview.onCreate(savedInstanceState)
+        AMapLocationManager.getInstance(requireContext())
+            .init(mAMap)
+        AMapLocationManager.getInstance(requireContext())
+            .onStart()
+        initListener()
     }
 
     private fun initAMap() {
@@ -44,7 +67,12 @@ class RunningFragment : BaseFragment() {
     }
 
     private fun initListener() {
-
+        AMapLocationManager.getInstance(requireContext())
+            .setOnLocationChangedListener(object : AMapLocationManager.OnLocationChangedListener {
+                override fun onLocationChanged(location: AMapLocation?) {
+                    Log.d("TAG", "$location")
+                }
+            })
     }
 
     override fun onResume() {
@@ -62,13 +90,15 @@ class RunningFragment : BaseFragment() {
         binding.mapview.onSaveInstanceState(outState)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         binding.mapview.onDestroy()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
+        AMapLocationManager.getInstance(requireContext())
+            .onStop()
         binding.mapview.onDestroy()
     }
 
