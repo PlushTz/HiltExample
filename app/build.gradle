@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -98,6 +99,7 @@ dependencies {
     // statusbarutil
     implementation 'com.github.Ye-Miao:StatusBarUtil:1.7.5'
     implementation 'com.qmuiteam:qmui:2.0.0-alpha10'
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
