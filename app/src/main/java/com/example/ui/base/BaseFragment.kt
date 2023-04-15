@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.ui.dialog.ExampleDialogFragment
-import com.qmuiteam.qmui.widget.QMUIEmptyView
 
 /**
  * Desc:
@@ -36,6 +35,6 @@ open class BaseFragment : Fragment() {
     }
 
     fun showLoadingView(){
-        QMUIEmptyView(requireContext()).show(true)
+
     }
 }

@@ -7,6 +7,7 @@ plugins {
 }
 
 android {
+
     signingConfigs {
         release {
             storeFile file('../keystore/travel.jks')
@@ -15,6 +16,7 @@ android {
             keyPassword 'lijintao'
         }
     }
+
     compileSdk 32
 
     defaultConfig {
@@ -49,27 +51,28 @@ android {
         }
     }
 
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding true
     }
 }
 
 dependencies {
-    implementation fileTree(include: '*.jar', dir: 'libs')
+//    implementation fileTree(include: '*.jar', dir: 'libs')
+    // 高德地图
+    implementation 'com.amap.api:3dmap:latest.integration'
+    // 高德地图定位
+//    implementation 'com.amap.api:location:latest.integration'
+    // 高德地图搜索
+//    implementation 'com.amap.api:search:latest.integration'
     implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
     // Hilt
@@ -96,10 +99,14 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     // permissionx
     implementation 'com.guolindev.permissionx:permissionx:1.7.1'
-    // statusbarutil
-    implementation 'com.github.Ye-Miao:StatusBarUtil:1.7.5'
-    implementation 'com.qmuiteam:qmui:2.0.0-alpha10'
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    // 基础依赖包，必须要依赖
+    implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
+    // kotlin扩展（可选）
+    implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
+    // fragment快速实现（可选）已废弃
+    implementation 'com.geyifeng.immersionbar:immersionbar-components:3.2.2'
+
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'

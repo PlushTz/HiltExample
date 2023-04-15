@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.net.ApiRetrofit
 import com.example.travel.R
 import com.example.travel.databinding.ActivityMainBinding
+import com.example.ui.base.BaseActivity
 import com.example.ui.launch.ExamplePagerAdapter
 import com.example.ui.personal.PersonalCenterFragment
 import com.example.ui.running.RunningFragment
@@ -16,19 +17,19 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     @Inject
     lateinit var apiService: ApiRetrofit
-    private lateinit var binding: ActivityMainBinding
     private val fragments = mutableMapOf<Int, Fragment>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         initData()
         initFragments()
         initListener()
     }
+
+    override fun getLayoutId() = R.layout.activity_main
 
     private fun initData() {
 

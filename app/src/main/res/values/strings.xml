@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HiltExample</string>
+    <string name="app_name">名地地图</string>
     <string name="insert">insert</string>
     <string name="select">select</string>
     <string name="delete">delete</string>
