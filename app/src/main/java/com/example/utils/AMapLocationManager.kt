@@ -1,12 +1,14 @@
 package com.example.utils
 
 import android.content.Context
+import android.graphics.Color
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
 import com.amap.api.maps.AMap
 import com.amap.api.maps.UiSettings
+import com.amap.api.maps.model.BitmapDescriptorFactory
 import com.amap.api.maps.model.MyLocationStyle
 import com.example.travel.R
 
@@ -35,11 +37,12 @@ class AMapLocationManager constructor(private val context: Context) : AMapLocati
         mLocationClient = AMapLocationClient(context)
         mLocationOption = AMapLocationClientOption()
         mLocationStyle = MyLocationStyle()
-        mLocationStyle?.interval(2000)
-        mLocationStyle?.strokeWidth(1.0f)
-        mLocationStyle?.strokeColor(context.resources.getColor(R.color.yellow))
-        mLocationStyle?.radiusFillColor(context.resources.getColor(R.color.yellow))
+        mLocationStyle?.interval(5000)
+        mLocationStyle?.strokeWidth(0f)
+        mLocationStyle?.strokeColor(Color.TRANSPARENT)
+        mLocationStyle?.radiusFillColor(Color.TRANSPARENT)
         mLocationStyle?.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER)
+        mLocationStyle?.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.location_icon))
         aMap?.myLocationStyle = mLocationStyle
         aMap?.isMyLocationEnabled = true
         mUiSettings = aMap?.uiSettings
@@ -51,6 +54,14 @@ class AMapLocationManager constructor(private val context: Context) : AMapLocati
         mLocationOption?.locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
         mLocationOption?.interval = 2000
         mLocationClient?.setLocationOption(mLocationOption)
+    }
+
+    /**
+     * 设置定位图标
+     * @param icon Int
+     */
+    fun setLocationIcon(icon: Int) {
+        mLocationStyle?.myLocationIcon(BitmapDescriptorFactory.fromResource(icon))
     }
 
     fun onStart() {

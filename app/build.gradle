@@ -77,6 +77,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
     // Hilt
     implementation "com.google.dagger:hilt-android:2.44"
+    implementation 'androidx.core:core-splashscreen:1.0.1'
     kapt "com.google.dagger:hilt-compiler:2.44"
     // Room
     implementation "androidx.room:room-runtime:2.4.3"
@@ -94,7 +95,7 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:4.10.0"
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
     // navigation
-    def nav_version = "2.5.2"
+    def nav_version = "2.5.3"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     // permissionx
@@ -105,6 +106,8 @@ dependencies {
     implementation 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
     // fragment快速实现（可选）已废弃
     implementation 'com.geyifeng.immersionbar:immersionbar-components:3.2.2'
+    // 轮子哥开源Toaster
+    implementation 'com.github.getActivity:Toaster:12.2'
 
     implementation "androidx.datastore:datastore-preferences:1.0.0"
     implementation 'androidx.core:core-ktx:1.8.0'

@@ -1,6 +1,7 @@
 package com.example
 
 import android.app.Application
+import com.hjq.toast.Toaster
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -10,4 +11,9 @@ import dagger.hilt.android.HiltAndroidApp
  * Email: lijt@eetrust.com
  */
 @HiltAndroidApp
-class BaseApplication : Application()
+class BaseApplication : Application(){
+    override fun onCreate() {
+        super.onCreate()
+        Toaster.init(this)
+    }
+}

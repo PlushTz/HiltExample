@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.gyf.immersionbar.ImmersionBar
+import com.hjq.toast.ToastParams
+import com.hjq.toast.Toaster
+import com.hjq.toast.style.BlackToastStyle
 
 /**
  * Desc:
@@ -29,4 +32,11 @@ abstract class BaseActivity<D : ViewDataBinding> : AppCompatActivity() {
 
     @LayoutRes
     abstract fun getLayoutId(): Int?
+
+    fun showToast(msg: String) {
+        val params = ToastParams()
+        params.text = msg
+        params.style = BlackToastStyle()
+        Toaster.show(params)
+    }
 }

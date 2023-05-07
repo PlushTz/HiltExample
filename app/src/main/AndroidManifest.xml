@@ -56,30 +56,39 @@
             android:name="com.example.ui.main.MainActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
             android:exported="true"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name="com.example.ui.user.UserListActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden" />
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.ui.splash.SplashActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
             android:exported="true"
-            android:theme="@style/SplashTheme">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.App.Starting">
+
+        </activity>
+        <activity
+            android:name="com.example.ui.launch.MainActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:exported="true"
+            android:name="com.example.ui.map.AMapActivity"
+            android:theme="@style/Theme.App.Starting"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.ui.launch.MainActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
-            android:exported="true" />
-        <activity
-            android:name="com.example.ui.map.AMapActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden" />
 
         <service android:name="com.amap.api.location.APSService" />
     </application>
