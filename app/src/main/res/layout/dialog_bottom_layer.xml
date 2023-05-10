@@ -7,17 +7,55 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/white">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:background="@drawable/shape_header">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/app_logo_01"
+        <CheckBox
+            android:id="@+id/cb_layer_traffic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/selector_layers"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="@string/cb_layer_traffic"
+            android:textColor="@color/black1"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cb_layer_satellite"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cb_layer_satellite"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/selector_layers"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/cb_layer_satellite"
+            android:textColor="@color/black1"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cb_layer_night"
+            app:layout_constraintStart_toEndOf="@+id/cb_layer_traffic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cb_layer_night"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/selector_layers"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/cb_layer_night"
+            android:textColor="@color/black1"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cb_layer_satellite"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

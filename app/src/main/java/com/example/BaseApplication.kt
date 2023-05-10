@@ -11,9 +11,14 @@ import dagger.hilt.android.HiltAndroidApp
  * Email: lijt@eetrust.com
  */
 @HiltAndroidApp
-class BaseApplication : Application(){
+class BaseApplication : Application() {
+    companion object {
+        lateinit var instance: BaseApplication
+    }
+
     override fun onCreate() {
         super.onCreate()
+        instance = this
         Toaster.init(this)
     }
 }

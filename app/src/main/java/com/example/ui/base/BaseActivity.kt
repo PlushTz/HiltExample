@@ -24,6 +24,8 @@ abstract class BaseActivity<D : ViewDataBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
+        ImmersionBar.with(this).statusBarDarkFont(true)
+            .init()
         val layoutId = getLayoutId()
         if (layoutId != null) {
             binding = DataBindingUtil.setContentView(this, layoutId)

@@ -9,12 +9,14 @@ import androidx.databinding.DataBindingUtil
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.maps.AMap
-import com.amap.api.maps.model.LatLng
+import com.example.constant.DataStoreConst
 import com.example.travel.R
 import com.example.travel.databinding.ActivityAmapBinding
+import com.example.travel.databinding.DialogBottomLayerBinding
 import com.example.ui.base.BaseActivity
 import com.example.utils.AMapLocationManager
 import com.example.utils.AMapManager
+import com.example.utils.DataStore
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gyf.immersionbar.ImmersionBar
 import com.permissionx.guolindev.PermissionX
@@ -49,6 +51,8 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
+        ImmersionBar.with(this).statusBarDarkFont(true)
+            .init()
         if (PermissionX.isGranted(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -77,9 +81,6 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
     }
 
     private fun loadView(savedInstanceState: Bundle?) {
-        ImmersionBar.with(this)
-            .statusBarDarkFont(true)
-            .init()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_amap)
         initMapView(savedInstanceState)
         initListener()
@@ -87,11 +88,49 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
 
     private fun initListener() {
         binding.tvMenuLayer.setOnClickListener {
-            val bottomSheetDialog = BottomSheetDialog(this)
-            bottomSheetDialog.setContentView(R.layout.dialog_bottom_layer)
-            bottomSheetDialog.window?.setDimAmount(0f)
+            val bottomSheetDialog = BottomSheetDialog(this, R.style.MyBottomSheetDialogBgStyle)
+            val binding: DialogBottomLayerBinding = DialogBottomLayerBinding.inflate(layoutInflater)
+            bottomSheetDialog.setContentView(binding.root)
             bottomSheetDialog.show()
+            reloadLayer(binding)
+            binding.cbLayerTraffic.setOnCheckedChangeListener { _, isChecked ->
+                DataStore.putData(DataStoreConst.DS_LAYER_TRAFFIC, isChecked)
+                mAMap?.isTrafficEnabled = isChecked
+                reloadLayer(binding)
+            }
+
+            binding.cbLayerSatellite.setOnCheckedChangeListener { _, isChecked ->
+                DataStore.putData(DataStoreConst.DS_LAYER_SATELLITE, isChecked)
+                reloadLayer(binding)
+                if (isChecked) {
+                    mAMap?.mapType = AMap.MAP_TYPE_SATELLITE
+                    binding.cbLayerNight.isChecked = false
+                }
+            }
+
+            binding.cbLayerNight.setOnCheckedChangeListener { _, isChecked ->
+                DataStore.putData(DataStoreConst.DS_LAYER_NIGHT, isChecked)
+                reloadLayer(binding)
+                if (isChecked) {
+                    mAMap?.mapType = AMap.MAP_TYPE_NIGHT
+                    binding.cbLayerSatellite.isChecked = false
+                }
+            }
         }
+    }
+
+    /**
+     * 初始化图层
+     * @param binding DialogBottomLayerBinding
+     * @return Unit
+     */
+
+    private fun reloadLayer(binding: DialogBottomLayerBinding) {
+        binding.cbLayerTraffic.isChecked =
+            DataStore.getData(DataStoreConst.DS_LAYER_TRAFFIC, false)
+        binding.cbLayerNight.isChecked = DataStore.getData(DataStoreConst.DS_LAYER_NIGHT, false)
+        binding.cbLayerSatellite.isChecked =
+            DataStore.getData(DataStoreConst.DS_LAYER_SATELLITE, false)
     }
 
     private fun initMapView(savedInstanceState: Bundle?) {
@@ -100,6 +139,7 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
         binding.mapview.onCreate(savedInstanceState)
         if (mAMap == null) {
             mAMap = binding.mapview.map
+            initLayer(mAMap)
             AMapLocationManager.getInstance(this)
                 .init(mAMap)
             AMapManager.getInstance(this@AMapActivity)
@@ -121,6 +161,16 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
                         }
                     }
                 })
+        }
+    }
+
+    private fun initLayer(mAMap: AMap?) {
+        mAMap?.isTrafficEnabled = DataStore.getData(DataStoreConst.DS_LAYER_TRAFFIC, false)
+        if (DataStore.getData(DataStoreConst.DS_LAYER_SATELLITE, false)) {
+            mAMap?.mapType = AMap.MAP_TYPE_SATELLITE
+        }
+        if (DataStore.getData(DataStoreConst.DS_LAYER_NIGHT, false)) {
+            mAMap?.mapType = AMap.MAP_TYPE_NIGHT
         }
     }
 

@@ -6,4 +6,9 @@
     <string name="update">update</string>
     <string name="btn_request">request</string>
     <string name="showdialog">showdialog</string>
+    <string name="activity_amap_tv_location">定位</string>
+    <string name="activity_amap_tv_layer">图层</string>
+    <string name="cb_layer_traffic">路况图层</string>
+    <string name="cb_layer_satellite">卫星图层</string>
+    <string name="cb_layer_night">夜景地图</string>
 </resources>

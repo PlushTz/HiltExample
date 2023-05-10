@@ -30,7 +30,6 @@ import kotlinx.coroutines.withContext
  * Created on 2022/10/11 15:44
  * Email: lijt@eetrust.com
  */
-@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     private val permissions = mutableListOf(
         Manifest.permission.ACCESS_FINE_LOCATION,

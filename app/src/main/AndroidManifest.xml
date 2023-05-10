@@ -67,7 +67,7 @@
         <activity
             android:name="com.example.ui.splash.SplashActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.App.Starting">
 
