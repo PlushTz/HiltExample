@@ -16,4 +16,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "HiltExample"
 include ':app'
-//include ':datastore'
