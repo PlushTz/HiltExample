@@ -8,7 +8,7 @@ import com.example.response.SearchResponse
  * Created on 2022/10/14 10:38
  * Email: lijt@eetrust.com
  */
-class ApiRetrofit : BaseApiRetrofit() {
+class ApiRetrofit private constructor() : BaseApiRetrofit() {
     companion object {
         @Volatile
         private var instance: ApiRetrofit? = null

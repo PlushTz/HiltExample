@@ -1,6 +1,6 @@
 package com.example.repository
 
-import com.example.database.ExampleDatabase
+import com.example.database.AppDatabase
 import com.example.database.entity.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -14,7 +14,7 @@ import javax.inject.Inject
  * Created on 2022/10/9 10:10
  * Email: lijt@eetrust.com
  */
-class UserRepository @Inject constructor(private val exampleDb: ExampleDatabase) {
+class UserRepository @Inject constructor(private val exampleDb: AppDatabase) {
     suspend fun insert(user: User) {
         exampleDb.userDao.insert(user)
     }

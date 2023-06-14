@@ -4,7 +4,7 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import com.example.database.ExampleDatabase
+import com.example.database.AppDatabase
 import com.example.database.entity.Search
 import com.example.net.GitHubApi
 
@@ -18,7 +18,7 @@ import com.example.net.GitHubApi
 class ExampleMediator(
     private val query: String,
     private val gitHubApi: GitHubApi,
-    private val database: ExampleDatabase
+    private val database: AppDatabase
 ) : RemoteMediator<Int, Search>() {
     override suspend fun initialize(): InitializeAction {
         return InitializeAction.LAUNCH_INITIAL_REFRESH

@@ -19,7 +19,7 @@ import com.example.database.entity.User
     version = 2,
     autoMigrations = [AutoMigration(from = 1, to = 2)]
 )
-abstract class ExampleDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     abstract val userDao: UserDao
     abstract val searchDao: SearchDao
 }
