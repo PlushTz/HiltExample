@@ -16,8 +16,8 @@ import com.example.database.entity.User
  */
 @Database(
     entities = [User::class, Search::class],
-    version = 2,
-    autoMigrations = [AutoMigration(from = 1, to = 2)]
+    version = 1,
+//    autoMigrations = [AutoMigration(from = 1, to = 2)]
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract val userDao: UserDao
