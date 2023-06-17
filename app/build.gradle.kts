@@ -16,12 +16,12 @@ android {
         }
     }
 
-    compileSdk = 32
+    compileSdk = SDKVersion.compileSdk
 
     defaultConfig {
-        applicationId = "com.example.travel"
-        minSdk = 22
-        targetSdk = 32
+        applicationId = SDKVersion.applicationId
+        minSdk = SDKVersion.minSdk
+        targetSdk = SDKVersion.targetSdk
         versionCode = 100
         versionName = "1.0.0"
         kapt {
@@ -41,38 +41,30 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
-            proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
-            )
+            isMinifyEnabled = true
+            isDebuggable = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("release")
         }
 
         debug {
             isMinifyEnabled = false
-            proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
-            )
+            isDebuggable = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("release")
         }
     }
-    flavorDimensions += "version"
 
-    productFlavors {
-        create("travel") {
-            dimension = "version"
-            versionCode = defaultConfig.versionCode
-            versionName = defaultConfig.versionName
-            versionNameSuffix = "_${defaultConfig.versionName}"
-        }
-    }
     applicationVariants.all {
-        this.outputs.all {
-            val appName = "TravelApp"
-            val buildType = buildTypes.getByName("release")
-            "$appName _$buildType _${android.defaultConfig.versionName}"
+        val buildType = this.buildType.name
+        outputs.all {
+            if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
+                val appName = "TravelApp"
+                outputFileName = appName.plus("_")
+                    .plus(buildType)
+                    .plus(android.defaultConfig.versionName)
+                    .plus(".apk")
+            }
         }
     }
 
@@ -92,47 +84,47 @@ android {
 
 dependencies {
     // 高德地图
-    implementation("com.amap.api:3dmap:latest.integration")
-    implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    implementation(DependenciesLibrary.amap)
+    implementation(DependenciesLibrary.hilt_navigation_fragment)
+    implementation(DependenciesLibrary.lifecycle_runtime_ktx)
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-compiler:2.44")
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(DependenciesLibrary.hilt_android)
+    kapt(DependenciesLibrary.hilt_compiler)
+    implementation(DependenciesLibrary.splashscreen)
     // Room
-    implementation("androidx.room:room-runtime:2.4.3")
-    implementation("androidx.room:room-ktx:2.4.3")
-    kapt("androidx.room:room-compiler:2.4.3")
+    implementation(DependenciesLibrary.room_runtime)
+    implementation(DependenciesLibrary.room_ktx)
+    kapt(DependenciesLibrary.room_compiler)
     // Glide
-    implementation("com.github.bumptech.glide:glide:4.14.2")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
+    implementation(DependenciesLibrary.glide)
+    annotationProcessor(DependenciesLibrary.glide_compiler)
     // Paging 3.1
-    implementation("androidx.paging:paging-runtime:3.1.1")
+    implementation(DependenciesLibrary.paging3)
     // retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(DependenciesLibrary.retrofit)
+    implementation(DependenciesLibrary.retrofit_converter_gson)
     // OkHttp
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation(DependenciesLibrary.okhttp)
+    implementation(DependenciesLibrary.okhttp_log_interceptor)
     // navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+    implementation(DependenciesLibrary.navigation_fragment_ktx)
+    implementation(DependenciesLibrary.navigation_ui_ktx)
     // permissionx
-    implementation("com.guolindev.permissionx:permissionx:1.7.1")
+    implementation(DependenciesLibrary.permissionx)
     // 基础依赖包，必须要依赖
-    implementation("com.geyifeng.immersionbar:immersionbar:3.2.2")
+    implementation(DependenciesLibrary.immersionbar)
     // kotlin扩展（可选）
-    implementation("com.geyifeng.immersionbar:immersionbar-ktx:3.2.2")
+    implementation(DependenciesLibrary.immersionbar_ktx)
     // 轮子哥开源Toaster
-    implementation("com.github.getActivity:Toaster:12.2")
+    implementation(DependenciesLibrary.toaster)
 
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
-    implementation("androidx.datastore:datastore-preferences-core:1.0.0")
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.appcompat:appcompat:1.4.2")
-    implementation("com.google.android.material:material:1.6.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    implementation(DependenciesLibrary.datastore)
+    implementation(DependenciesLibrary.datastore_core)
+    implementation(DependenciesLibrary.androidx_core_ktx)
+    implementation(DependenciesLibrary.appcompat)
+    implementation(DependenciesLibrary.material)
+    implementation(DependenciesLibrary.constraintlayout)
+    testImplementation(DependenciesLibrary.junit)
+    androidTestImplementation(DependenciesLibrary.android_test)
+    androidTestImplementation(DependenciesLibrary.androidx_test_espresso)
 }
