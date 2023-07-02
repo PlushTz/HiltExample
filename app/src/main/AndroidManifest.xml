@@ -51,15 +51,6 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="ee45cd08b9929a308dcfef5d389e55eb" />
-
-        <activity
-            android:name="com.example.ui.main.MainActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait">
-
-        </activity>
         <activity
             android:name="com.example.ui.user.UserListActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"

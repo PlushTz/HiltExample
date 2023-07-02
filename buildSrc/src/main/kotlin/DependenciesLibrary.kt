@@ -16,7 +16,7 @@ object DependenciesLibrary {
     private const val room_version = "2.4.3"
     private const val glide_version = "4.14.2"
     private const val retrofit_version = "2.9.0"
-    private const val okhttp_version = "4.10.2"
+    private const val okhttp_version = "4.9.0"
     private const val navigation_version = "2.5.3"
     private const val immersionbar_version = "3.2.2"
 

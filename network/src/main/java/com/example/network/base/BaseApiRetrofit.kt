@@ -1,5 +1,7 @@
-package com.example.net
+package com.example.network.base
 
+import com.example.network.NetConst
+import com.example.network.api.GitHubApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

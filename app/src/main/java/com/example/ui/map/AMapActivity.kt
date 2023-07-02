@@ -4,12 +4,15 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.maps.AMap
 import com.example.constant.DataStoreConst
+import com.example.network.api.ApiRetrofit
+import com.example.network.api.GitHubApi
 import com.example.travel.R
 import com.example.travel.databinding.ActivityAmapBinding
 import com.example.travel.databinding.DialogBottomLayerBinding
@@ -21,6 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.gyf.immersionbar.ImmersionBar
 import com.permissionx.guolindev.PermissionX
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * Desc:
@@ -30,6 +34,8 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class AMapActivity : BaseActivity<ActivityAmapBinding>() {
+    private val viewModel: AMapViewModel by viewModels()
+
     companion object {
         fun start(context: Context) {
             context.startActivity(Intent(context, AMapActivity::class.java))
@@ -111,6 +117,7 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
             binding.cbLayerNight.setOnCheckedChangeListener { _, isChecked ->
                 DataStore.putData(DataStoreConst.DS_LAYER_NIGHT, isChecked)
                 reloadLayer(binding)
+                viewModel.search("android")
                 if (isChecked) {
                     mAMap?.mapType = AMap.MAP_TYPE_NIGHT
                     binding.cbLayerSatellite.isChecked = false

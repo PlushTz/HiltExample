@@ -83,6 +83,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":network"))
     // 高德地图
     implementation(DependenciesLibrary.amap)
     implementation(DependenciesLibrary.hilt_navigation_fragment)

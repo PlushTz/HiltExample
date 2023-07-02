@@ -1,6 +1,6 @@
-package com.example.net
+package com.example.network.api
 
-import com.example.response.SearchResponse
+import com.example.network.response.SearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

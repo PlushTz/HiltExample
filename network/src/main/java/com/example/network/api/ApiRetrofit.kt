@@ -1,6 +1,7 @@
-package com.example.net
+package com.example.network.api
 
-import com.example.response.SearchResponse
+import com.example.network.base.BaseApiRetrofit
+import com.example.network.response.SearchResponse
 
 /**
  * Desc:

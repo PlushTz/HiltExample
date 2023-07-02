@@ -1,6 +1,6 @@
-package com.example.di
+package com.example.network
 
-import com.example.net.ApiRetrofit
+import com.example.network.api.ApiRetrofit
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,15 +10,13 @@ import javax.inject.Singleton
 /**
  * Desc:
  * @author lijt
- * Created on 2022/10/14 11:27
- * Email: lijt@eetrust.com
+ * Created on 2023/6/18 00:46
+ * Email:
  */
 @Module
 @InstallIn(SingletonComponent::class)
-class NetWorkModules {
-    @Provides
+object NetworkModule {
     @Singleton
-    fun provideGitHubNet(): ApiRetrofit {
-        return ApiRetrofit.getInstance()
-    }
+    @Provides
+    fun provideGithubApi() = ApiRetrofit.getInstance()
 }

@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "HiltExample"
 include(":app")
+include(":network")

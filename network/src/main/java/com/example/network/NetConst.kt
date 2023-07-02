@@ -1,4 +1,4 @@
-package com.example.net
+package com.example.network
 
 /**
  * Desc:
