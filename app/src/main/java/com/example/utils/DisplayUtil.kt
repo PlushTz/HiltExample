@@ -62,10 +62,10 @@ object DisplayUtil {
      * @return
      */
     fun getScreenRate(context: Context): Float {
-        val P = getScreenMetrics(context)
-        val H = P.y.toFloat()
-        val W = P.x.toFloat()
-        return H / W
+        val p = getScreenMetrics(context)
+        val h = p.y.toFloat()
+        val w = p.x.toFloat()
+        return h / w
     }
 
     /**

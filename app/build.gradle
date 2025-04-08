@@ -1,0 +1,114 @@
+plugins {
+    alias(libs.plugins.android.aplication)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.ksp)
+}
+
+android {
+    signingConfigs {
+        release {
+            storeFile = file("../keystore/travel.jks")
+            storePassword "lijintao"
+            keyAlias "travel"
+            keyPassword "lijintao"
+        }
+    }
+
+    compileSdk = SDKVersion.compileSdk
+
+    defaultConfig {
+        applicationId SDKVersion.applicationId
+        minSdk SDKVersion.minSdk
+        targetSdk SDKVersion.targetSdk
+        versionCode 100
+        versionName "1.0.0"
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+        }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
+            def appName = "TravelApp"
+            def builtType = output.name
+            outputFileName = appName + "_" + builtType + "_" + versionName + ".apk"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+    namespace 'com.example.travel'
+}
+
+dependencies {
+    implementation(project(":network"))
+    // 高德地图
+    implementation libs.amap
+    implementation libs.hilt.navigation.fragment
+    implementation libs.lifecycle.runtime.ktx
+    implementation libs.hilt.android
+    ksp libs.hilt.compiler
+    implementation libs.splashscreen
+    implementation libs.room.runtime
+    implementation libs.room.ktx
+    ksp libs.room.compiler
+    implementation libs.glide
+    annotationProcessor libs.glide.compiler
+    implementation libs.paging.runtime
+    implementation libs.retrofit2
+    implementation libs.retrofit2.converter.gson
+    implementation libs.okhttp3
+    implementation libs.okhttp3.logging.interceptor
+    implementation libs.navigation.fragment.ktx
+    implementation libs.navigation.ui.ktx
+    implementation libs.permissionx
+    implementation libs.immersionbar
+    implementation libs.immersionbar.ktx
+    implementation libs.toaster
+    implementation libs.datastore
+    implementation libs.datastore.core
+    implementation libs.androidx.core.ktx
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+}

@@ -18,7 +18,7 @@ import com.example.travel.R
  * Created on 2022/11/24 12:55
  * Email: lijt@eetrust.com
  */
-class AMapLocationManager constructor(private val context: Context) : AMapLocationListener {
+class AMapLocationManager private constructor() : AMapLocationListener {
 
     private var mLocationClient: AMapLocationClient? = null
     private var mLocationOption: AMapLocationClientOption? = null
@@ -28,12 +28,14 @@ class AMapLocationManager constructor(private val context: Context) : AMapLocati
 
     companion object {
         private var instance: AMapLocationManager? = null
-        fun getInstance(context: Context) = instance ?: synchronized(this) {
-            instance ?: AMapLocationManager(context).also { instance = it }
+        fun getInstance() = instance ?: synchronized(this) {
+            instance ?: AMapLocationManager().also {
+                instance = it
+            }
         }
     }
 
-    fun init(aMap: AMap?) {
+    fun init(aMap: AMap?, context: Context) {
         mLocationClient = AMapLocationClient(context)
         mLocationOption = AMapLocationClientOption()
         mLocationStyle = MyLocationStyle()

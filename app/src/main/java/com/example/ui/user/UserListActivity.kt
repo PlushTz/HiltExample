@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,7 +72,7 @@ class UserListActivity : AppCompatActivity() {
         binding.rvUserList.adapter = userListAdapter
         binding.rvUserList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val itemDecoration = ItemDecoration(this, ItemDecoration.VERTICAL, false, null)
-        itemDecoration.setDrawable(resources.getDrawable(R.drawable.item_divider_bg))
+        itemDecoration.setDrawable(ResourcesCompat.getDrawable(resources, R.drawable.item_divider_bg, null))
         binding.rvUserList.addItemDecoration(itemDecoration)
         lifecycleScope.launch {
             viewModel.queryAllUser()

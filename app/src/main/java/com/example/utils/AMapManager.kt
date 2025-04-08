@@ -1,6 +1,5 @@
 package com.example.utils
 
-import android.content.Context
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.LatLng
@@ -11,13 +10,13 @@ import com.amap.api.maps.model.LatLng
  * Created on 2023/4/16 23:02
  * Email:
  */
-class AMapManager private constructor(val context: Context) {
+class AMapManager private constructor() {
     private var mAMap: AMap? = null
 
     companion object {
         private var instance: AMapManager? = null
-        fun getInstance(context: Context) = instance ?: synchronized(this) {
-            instance ?: AMapManager(context).also {
+        fun getInstance() = instance ?: synchronized(this) {
+            instance ?: AMapManager().also {
                 instance = it
             }
         }

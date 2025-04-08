@@ -42,13 +42,7 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
         }
     }
 
-    private val permissions = mutableListOf(
-        Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.ACCESS_COARSE_LOCATION,
-        Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
-    )
+    private val permissions = mutableListOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
     private var mAMap: AMap? = null
 
@@ -57,22 +51,10 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
-        ImmersionBar.with(this).statusBarDarkFont(true)
+        ImmersionBar.with(this)
+            .statusBarDarkFont(true)
             .init()
-        if (PermissionX.isGranted(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) && PermissionX.isGranted(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) && PermissionX.isGranted(
-                this,
-                Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS
-            ) && PermissionX.isGranted(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) && PermissionX.isGranted(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        ) {
+        if (PermissionX.isGranted(this, Manifest.permission.ACCESS_FINE_LOCATION) && PermissionX.isGranted(this, Manifest.permission.ACCESS_COARSE_LOCATION) && PermissionX.isGranted(this, Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS) && PermissionX.isGranted(this, Manifest.permission.READ_EXTERNAL_STORAGE) && PermissionX.isGranted(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             loadView(savedInstanceState)
         } else {
             PermissionX.init(this)
@@ -133,11 +115,9 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
      */
 
     private fun reloadLayer(binding: DialogBottomLayerBinding) {
-        binding.cbLayerTraffic.isChecked =
-            DataStore.getData(DataStoreConst.DS_LAYER_TRAFFIC, false)
+        binding.cbLayerTraffic.isChecked = DataStore.getData(DataStoreConst.DS_LAYER_TRAFFIC, false)
         binding.cbLayerNight.isChecked = DataStore.getData(DataStoreConst.DS_LAYER_NIGHT, false)
-        binding.cbLayerSatellite.isChecked =
-            DataStore.getData(DataStoreConst.DS_LAYER_SATELLITE, false)
+        binding.cbLayerSatellite.isChecked = DataStore.getData(DataStoreConst.DS_LAYER_SATELLITE, false)
     }
 
     private fun initMapView(savedInstanceState: Bundle?) {
@@ -147,15 +127,14 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
         if (mAMap == null) {
             mAMap = binding.mapview.map
             initLayer(mAMap)
-            AMapLocationManager.getInstance(this)
+            AMapLocationManager.getInstance()
+                .init(mAMap,this)
+            AMapManager.getInstance()
                 .init(mAMap)
-            AMapManager.getInstance(this@AMapActivity)
-                .init(mAMap)
-            AMapLocationManager.getInstance(this)
+            AMapLocationManager.getInstance()
                 .onStart()
-            AMapLocationManager.getInstance(this)
-                .setOnLocationChangedListener(object :
-                    AMapLocationManager.OnLocationChangedListener {
+            AMapLocationManager.getInstance()
+                .setOnLocationChangedListener(object : AMapLocationManager.OnLocationChangedListener {
                     override fun onLocationChanged(location: AMapLocation?) {
                         //获取当前位置的经度
                         val longitude = location?.longitude!!
@@ -163,7 +142,7 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
                         val latitude = location.latitude
                         if (isLauncher) {
                             isLauncher = false
-                            AMapManager.getInstance(this@AMapActivity)
+                            AMapManager.getInstance()
                                 .moveCamera(latitude, longitude)
                         }
                     }
@@ -191,7 +170,7 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
     override fun onPause() {
         super.onPause()
         binding.mapview.onPause()
-        AMapLocationManager.getInstance(this)
+        AMapLocationManager.getInstance()
             .onStop()
     }
 
@@ -203,7 +182,7 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
     override fun onDestroy() {
         super.onDestroy()
         binding.mapview.onDestroy()
-        AMapLocationManager.getInstance(this)
+        AMapLocationManager.getInstance()
             .onStop()
     }
 }

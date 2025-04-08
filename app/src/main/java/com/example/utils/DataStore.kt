@@ -72,55 +72,61 @@ object DataStore {
     /**
      * 取出Int数据
      */
-    private fun getIntData(key: String, default: Int = 0): Int = runBlocking {
+    fun getIntData(key: String, default: Int = 0): Int = runBlocking {
         return@runBlocking dataStore.data.map {
             it[intPreferencesKey(key)] ?: default
-        }.first()
+        }
+            .first()
     }
 
     /**
      * 取出Long数据
      */
-    private fun getLongData(key: String, default: Long = 0): Long = runBlocking {
+    fun getLongData(key: String, default: Long = 0): Long = runBlocking {
         return@runBlocking dataStore.data.map {
             it[longPreferencesKey(key)] ?: default
-        }.first()
+        }
+            .first()
     }
 
     /**
      * 取出String数据
      */
-    private fun getStringData(key: String, default: String? = null): String = runBlocking {
+    fun getStringData(key: String, default: String? = null): String = runBlocking {
         return@runBlocking dataStore.data.map {
             it[stringPreferencesKey(key)] ?: default
-        }.first()!!
+        }
+            .first()!!
     }
 
     /**
      * 取出Boolean数据
      */
-    private fun getBooleanData(key: String, default: Boolean = false): Boolean = runBlocking {
+    fun getBooleanData(key: String, default: Boolean = false): Boolean = runBlocking {
         return@runBlocking dataStore.data.map {
             it[booleanPreferencesKey(key)] ?: default
-        }.first()
+        }
+            .first()
     }
 
     /**
      * 取出Float数据
      */
-    private fun getFloatData(key: String, default: Float = 0.0f): Float = runBlocking {
+    fun getFloatData(key: String, default: Float = 0.0f): Float = runBlocking {
         return@runBlocking dataStore.data.map {
             it[floatPreferencesKey(key)] ?: default
-        }.first()
+        }
+            .first()
     }
 
     /**
      * 取出Double数据
      */
-    private fun getDoubleData(key: String, default: Double = 0.00): Double = runBlocking {
+    fun getDoubleData(key: String, default: Double = 0.00): Double = runBlocking {
         return@runBlocking dataStore.data.map {
             it[doublePreferencesKey(key)] ?: default
-        }.first()
+        }
+            .first()
     }
 
     /**
@@ -143,7 +149,7 @@ object DataStore {
     /**
      * 取数据
      */
-    fun <T> getData(key: String, defaultValue: T): T {
+    inline fun <reified T> getData(key: String, defaultValue: T): T {
         val data = when (defaultValue) {
             is Int -> getIntData(key, defaultValue)
             is Long -> getLongData(key, defaultValue)

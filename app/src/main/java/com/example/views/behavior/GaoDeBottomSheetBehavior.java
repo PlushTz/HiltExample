@@ -48,6 +48,7 @@ import java.util.Map;
  * @author yixiaolunhui
  */
 public class GaoDeBottomSheetBehavior<V extends View> extends Behavior<V> {
+
     public static final int STATE_DRAGGING = 1;
     public static final int STATE_SETTLING = 2;
     public static final int STATE_EXPANDED = 3;

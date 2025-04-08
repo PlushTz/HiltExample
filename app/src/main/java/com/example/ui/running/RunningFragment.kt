@@ -53,9 +53,9 @@ class RunningFragment : BaseFragment() {
         MapsInitializer.updatePrivacyShow(requireActivity(), true, true)
         MapsInitializer.updatePrivacyAgree(requireActivity(), true)
         binding.mapview.onCreate(savedInstanceState)
-        AMapLocationManager.getInstance(requireContext())
-            .init(mAMap)
-        AMapLocationManager.getInstance(requireContext())
+        AMapLocationManager.getInstance()
+            .init(mAMap,requireContext())
+        AMapLocationManager.getInstance()
             .onStart()
         initListener()
     }
@@ -67,7 +67,7 @@ class RunningFragment : BaseFragment() {
     }
 
     private fun initListener() {
-        AMapLocationManager.getInstance(requireContext())
+        AMapLocationManager.getInstance()
             .setOnLocationChangedListener(object : AMapLocationManager.OnLocationChangedListener {
                 override fun onLocationChanged(location: AMapLocation?) {
                     Log.d("TAG", "$location")
@@ -97,7 +97,7 @@ class RunningFragment : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        AMapLocationManager.getInstance(requireContext())
+        AMapLocationManager.getInstance()
             .onStop()
         binding.mapview.onDestroy()
     }
