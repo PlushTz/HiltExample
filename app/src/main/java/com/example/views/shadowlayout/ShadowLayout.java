@@ -35,9 +35,9 @@ public class ShadowLayout extends RelativeLayout {
 
     public static final int SHAPE_OVAL = 0x0010;
 
-    private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    private RectF mRectF = new RectF();
+    private final RectF mRectF = new RectF();
 
     /**
      * 阴影的颜色
@@ -163,16 +163,13 @@ public class ShadowLayout extends RelativeLayout {
         this.setWillNotDraw(false);                    // 调用此方法后，才会执行 onDraw(Canvas) 方法
 
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ShadowLayout);
-        if (typedArray != null) {
-            mShadowColor = typedArray.getColor(R.styleable.ShadowLayout_shadowColor,
-                    getContext().getResources().getColor(android.R.color.black));
-            mShadowRadius = typedArray.getDimension(R.styleable.ShadowLayout_shadowRadius, dip2px(0));
-            mShadowDx = typedArray.getDimension(R.styleable.ShadowLayout_shadowDx, dip2px(0));
-            mShadowDy = typedArray.getDimension(R.styleable.ShadowLayout_shadowDy, dip2px(0));
-            mShadowSide = typedArray.getInt(R.styleable.ShadowLayout_shadowSide, ALL);
-            mShadowShape = typedArray.getInt(R.styleable.ShadowLayout_shadowShape, SHAPE_RECTANGLE);
-            typedArray.recycle();
-        }
+        mShadowColor = typedArray.getColor(R.styleable.ShadowLayout_shadowColor, getContext().getResources().getColor(android.R.color.black));
+        mShadowRadius = typedArray.getDimension(R.styleable.ShadowLayout_shadowRadius, dip2px(0));
+        mShadowDx = typedArray.getDimension(R.styleable.ShadowLayout_shadowDx, dip2px(0));
+        mShadowDy = typedArray.getDimension(R.styleable.ShadowLayout_shadowDy, dip2px(0));
+        mShadowSide = typedArray.getInt(R.styleable.ShadowLayout_shadowSide, ALL);
+        mShadowShape = typedArray.getInt(R.styleable.ShadowLayout_shadowShape, SHAPE_RECTANGLE);
+        typedArray.recycle();
         setUpShadowPaint();
     }
 
