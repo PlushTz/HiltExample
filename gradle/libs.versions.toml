@@ -7,12 +7,12 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 hilt = "2.44"
-appcompat = "1.4.2"
+appcompat = "1.6.1"
 material = "1.6.1"
 constraintlayout = "2.1.4"
 navigationFragment = "1.0.0"
 lifecycleRuntimeKtx = "2.5.1"
-room = "2.4.3"
+room = "2.7.1"
 glide = "4.14.2"
 retrofit2 = "2.9.0"
 okhttp3 = "4.9.0"
@@ -22,8 +22,9 @@ splashscreen = "1.0.0"
 datastore = "1.0.0"
 pagingRuntime = "3.1.1"
 amap = "latest.integration"
-toaster = "12.2"
-permissionx = "1.7.1"
+toaster = "12.6"
+permissionx = "1.6.0"
+coroutines = "1.7.1"
 
 
 
@@ -59,6 +60,7 @@ toaster = { group = "com.github.getActivity", name = "Toaster", version.ref = "t
 immersionbar = { group = "com.geyifeng.immersionbar", name = "immersionbar", version.ref = "immersionbar" }
 immersionbar-ktx = { group = "com.geyifeng.immersionbar", name = "immersionbar-ktx", version.ref = "immersionbar" }
 permissionx = { group = "com.guolindev.permissionx", name = "permissionx", version.ref = "permissionx" }
+coroutine = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 
 
 

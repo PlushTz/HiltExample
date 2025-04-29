@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.ksp)
 }
 
 android {
@@ -17,7 +16,7 @@ android {
         }
     }
 
-    compileSdk = SDKVersion.compileSdk
+    compileSdk SDKVersion.compileSdk
 
     defaultConfig {
         applicationId SDKVersion.applicationId
@@ -82,13 +81,13 @@ dependencies {
     // 高德地图
     implementation libs.amap
     implementation libs.hilt.navigation.fragment
-    implementation libs.lifecycle.runtime.ktx
+//    implementation libs.lifecycle.runtime.ktx
     implementation libs.hilt.android
-    ksp libs.hilt.compiler
+    kapt libs.hilt.compiler
     implementation libs.splashscreen
     implementation libs.room.runtime
     implementation libs.room.ktx
-    ksp libs.room.compiler
+    kapt libs.room.compiler
     implementation libs.glide
     annotationProcessor libs.glide.compiler
     implementation libs.paging.runtime
