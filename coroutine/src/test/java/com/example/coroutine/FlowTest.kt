@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.buffer
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.runBlocking
@@ -123,6 +124,24 @@ class FlowTest {
                 }
         }
 
+        println("Collected in $time ms")
+    }
+
+    @Test
+    fun collectLatest() = runBlocking {
+        val flow = flow {
+            for (i in 1..3) {
+                delay(100)
+                emit(i)
+            }
+        }
+        val time = measureTimeMillis {
+            flow.collectLatest { value: Int ->
+                println("Collecting $value")
+                delay(300)
+                println("Done $value")
+            }
+        }
         println("Collected in $time ms")
     }
 
