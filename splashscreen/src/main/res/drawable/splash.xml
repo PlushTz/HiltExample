@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/about_logo" />
+    </item>
+<!--    <item android:bottom="12dp">-->
+<!--        <bitmap-->
+<!--            android:gravity="bottom|center_horizontal"-->
+<!--            android:src="@mipmap/copyright" />-->
+<!--    </item>-->
+</layer-list>
