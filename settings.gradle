@@ -18,3 +18,4 @@ rootProject.name = "HiltExample"
 include ':app'
 include ':network'
 include ':coroutine'
+include ':splashscreen'

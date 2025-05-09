@@ -5,8 +5,8 @@
  * Email:
  */
 object SDKVersion {
-    const val compileSdk = 32
+    const val compileSdk = 34
     const val applicationId = "com.example.travel"
     const val minSdk = 22
-    const val targetSdk = 32
+    const val targetSdk = 34
 }

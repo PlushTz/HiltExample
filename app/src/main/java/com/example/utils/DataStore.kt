@@ -11,6 +11,7 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.BaseApplication
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
@@ -72,8 +73,8 @@ object DataStore {
     /**
      * 取出Int数据
      */
-    fun getIntData(key: String, default: Int = 0): Int = runBlocking {
-        return@runBlocking dataStore.data.map {
+    suspend fun getIntData(key: String, default: Int = 0): Int = coroutineScope {
+        return@coroutineScope dataStore.data.map {
             it[intPreferencesKey(key)] ?: default
         }
             .first()
@@ -82,8 +83,8 @@ object DataStore {
     /**
      * 取出Long数据
      */
-    fun getLongData(key: String, default: Long = 0): Long = runBlocking {
-        return@runBlocking dataStore.data.map {
+    suspend fun getLongData(key: String, default: Long = 0): Long = coroutineScope {
+        return@coroutineScope dataStore.data.map {
             it[longPreferencesKey(key)] ?: default
         }
             .first()
@@ -92,8 +93,8 @@ object DataStore {
     /**
      * 取出String数据
      */
-    fun getStringData(key: String, default: String? = null): String = runBlocking {
-        return@runBlocking dataStore.data.map {
+    suspend fun getStringData(key: String, default: String? = null): String = coroutineScope {
+        return@coroutineScope dataStore.data.map {
             it[stringPreferencesKey(key)] ?: default
         }
             .first()!!
@@ -102,8 +103,8 @@ object DataStore {
     /**
      * 取出Boolean数据
      */
-    fun getBooleanData(key: String, default: Boolean = false): Boolean = runBlocking {
-        return@runBlocking dataStore.data.map {
+    suspend fun getBooleanData(key: String, default: Boolean = false): Boolean = coroutineScope {
+        return@coroutineScope dataStore.data.map {
             it[booleanPreferencesKey(key)] ?: default
         }
             .first()
@@ -112,8 +113,8 @@ object DataStore {
     /**
      * 取出Float数据
      */
-    fun getFloatData(key: String, default: Float = 0.0f): Float = runBlocking {
-        return@runBlocking dataStore.data.map {
+    suspend fun getFloatData(key: String, default: Float = 0.0f): Float = coroutineScope {
+        return@coroutineScope dataStore.data.map {
             it[floatPreferencesKey(key)] ?: default
         }
             .first()
@@ -122,8 +123,8 @@ object DataStore {
     /**
      * 取出Double数据
      */
-    fun getDoubleData(key: String, default: Double = 0.00): Double = runBlocking {
-        return@runBlocking dataStore.data.map {
+    suspend fun getDoubleData(key: String, default: Double = 0.00): Double = coroutineScope {
+        return@coroutineScope dataStore.data.map {
             it[doublePreferencesKey(key)] ?: default
         }
             .first()
@@ -132,8 +133,8 @@ object DataStore {
     /**
      * 存数据
      */
-    fun <T> putData(key: String, value: T) {
-        runBlocking {
+    suspend fun <T> putData(key: String, value: T) {
+        coroutineScope {
             when (value) {
                 is Int -> putIntData(key, value)
                 is Long -> putLongData(key, value)
@@ -149,7 +150,7 @@ object DataStore {
     /**
      * 取数据
      */
-    inline fun <reified T> getData(key: String, defaultValue: T): T {
+    suspend inline fun <reified T> getData(key: String, defaultValue: T): T {
         val data = when (defaultValue) {
             is Int -> getIntData(key, defaultValue)
             is Long -> getLongData(key, defaultValue)
@@ -165,5 +166,5 @@ object DataStore {
     /**
      * 清空数据
      */
-    fun clearData() = runBlocking { dataStore.edit { it.clear() } }
+    suspend fun clearData() = coroutineScope { dataStore.edit { it.clear() } }
 }

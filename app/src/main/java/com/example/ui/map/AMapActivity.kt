@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.maps.AMap
@@ -72,6 +73,24 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_amap)
         initMapView(savedInstanceState)
         initListener()
+        initData()
+    }
+
+    private fun initData() {
+        viewModel.queryTrafficLayer()
+        viewModel.querySatelliteLayer()
+        viewModel.queryNightLayer()
+
+        viewModel.trafficLayer.observe(this@AMapActivity) {
+            mAMap?.isTrafficEnabled = it
+        }
+
+        viewModel.nightLayer.observe(this@AMapActivity) {
+            mAMap?.mapType = if (it) AMap.MAP_TYPE_NIGHT else AMap.MAP_TYPE_SATELLITE
+        }
+
+
+
     }
 
     private fun initListener() {
@@ -82,13 +101,12 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
             bottomSheetDialog.show()
             reloadLayer(binding)
             binding.cbLayerTraffic.setOnCheckedChangeListener { _, isChecked ->
-                DataStore.putData(DataStoreConst.DS_LAYER_TRAFFIC, isChecked)
-                mAMap?.isTrafficEnabled = isChecked
+                viewModel.switchTrafficLayer(isChecked)
                 reloadLayer(binding)
             }
 
             binding.cbLayerSatellite.setOnCheckedChangeListener { _, isChecked ->
-                DataStore.putData(DataStoreConst.DS_LAYER_SATELLITE, isChecked)
+                viewModel.switchSatelliteLayer(isChecked)
                 reloadLayer(binding)
                 if (isChecked) {
                     mAMap?.mapType = AMap.MAP_TYPE_SATELLITE
@@ -97,9 +115,9 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
             }
 
             binding.cbLayerNight.setOnCheckedChangeListener { _, isChecked ->
-                DataStore.putData(DataStoreConst.DS_LAYER_NIGHT, isChecked)
+                viewModel.switchNightLayer(isChecked)
                 reloadLayer(binding)
-                viewModel.search("android")
+//                viewModel.search("android")
                 if (isChecked) {
                     mAMap?.mapType = AMap.MAP_TYPE_NIGHT
                     binding.cbLayerSatellite.isChecked = false
@@ -115,9 +133,16 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
      */
 
     private fun reloadLayer(binding: DialogBottomLayerBinding) {
-        binding.cbLayerTraffic.isChecked = DataStore.getData(DataStoreConst.DS_LAYER_TRAFFIC, false)
-        binding.cbLayerNight.isChecked = DataStore.getData(DataStoreConst.DS_LAYER_NIGHT, false)
-        binding.cbLayerSatellite.isChecked = DataStore.getData(DataStoreConst.DS_LAYER_SATELLITE, false)
+        viewModel.trafficLayer.observe(this@AMapActivity) {
+            binding.cbLayerTraffic.isChecked = it
+        }
+
+        viewModel.nightLayer.observe(this@AMapActivity) {
+            binding.cbLayerNight.isChecked = it
+        }
+        viewModel.satelliteLayer.observe(this@AMapActivity) {
+            binding.cbLayerSatellite.isChecked = it
+        }
     }
 
     private fun initMapView(savedInstanceState: Bundle?) {
@@ -126,9 +151,8 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
         binding.mapview.onCreate(savedInstanceState)
         if (mAMap == null) {
             mAMap = binding.mapview.map
-            initLayer(mAMap)
             AMapLocationManager.getInstance()
-                .init(mAMap,this)
+                .init(mAMap, this)
             AMapManager.getInstance()
                 .init(mAMap)
             AMapLocationManager.getInstance()
@@ -147,16 +171,6 @@ class AMapActivity : BaseActivity<ActivityAmapBinding>() {
                         }
                     }
                 })
-        }
-    }
-
-    private fun initLayer(mAMap: AMap?) {
-        mAMap?.isTrafficEnabled = DataStore.getData(DataStoreConst.DS_LAYER_TRAFFIC, false)
-        if (DataStore.getData(DataStoreConst.DS_LAYER_SATELLITE, false)) {
-            mAMap?.mapType = AMap.MAP_TYPE_SATELLITE
-        }
-        if (DataStore.getData(DataStoreConst.DS_LAYER_NIGHT, false)) {
-            mAMap?.mapType = AMap.MAP_TYPE_NIGHT
         }
     }
 
